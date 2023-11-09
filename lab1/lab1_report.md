@@ -18,7 +18,7 @@ ________________________________________________________________________________
   `minikube start`
 4. Проверим, что Minikube запущен: 
   `minikube status`
-   ![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/03d9a5dd-bf22-400a-abac-fbb995439ba6)
+![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/03d9a5dd-bf22-400a-abac-fbb995439ba6)
 5. Установим kubectl: 
   `minikube kubectl`
 
