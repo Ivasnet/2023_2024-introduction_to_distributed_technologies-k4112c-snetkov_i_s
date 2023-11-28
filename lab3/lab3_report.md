@@ -53,6 +53,12 @@ ________________________________________________________________________________
 `127.0.0.1 lab3.front.local`
 
 8. Переходим на сайт: https://lab3.front.local
+![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/e2d6d961-1c2c-47cc-9df8-a10e4f9230ed)
+
+А также сертификат:
+![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/e1fd8ead-d40e-4b39-ab13-bcc4bb17babb)
+
+
 
 ## Схема организации контейеров и сервисов
 ![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/f0ba807b-e40b-434a-afa1-187dcb3f55a0)
