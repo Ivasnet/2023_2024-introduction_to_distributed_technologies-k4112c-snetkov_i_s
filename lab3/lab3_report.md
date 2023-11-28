@@ -20,48 +20,39 @@ ________________________________________________________________________________
 
 
 ## Подготовка
-1. Установим [Docker](https://www.docker.com/) на рабочий компьютер
-2. Установим [Minikube](https://minikube.sigs.k8s.io/docs/start/)
-3. Выполним запуск Minikube: 
+1. Для начала скачаем репозиторий на рабочий компьютер:
+  `docker pull ifilyaninitmo/itdt-contained-frontend:master`
+2. Запускаем Minikube:
   `minikube start`
-4. Проверим, что Minikube запущен: 
-  `minikube status`
-![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/03d9a5dd-bf22-400a-abac-fbb995439ba6)
-5. Установим kubectl: 
-  `minikube kubectl`
+3. Затем включим Ingress:
+  `minikube addons enable ingress`
 
 ## Выполнение работы
-1. Создадим манифест [vault.yaml](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/blob/main/lab1/vault.yaml)
-   
-![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/a4b3d9ef-97d6-40c4-81fe-b1c37212a087)
+1. Создадим [configMap](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/blob/main/lab3/configmap.yaml) с переменными `REACT_APP_USERNAME` и `REACT_APP_COMPANY_NAME`
 
-2. Применим данный манифест для создания пода: 
-  `minikube kubectl -- apply -f vault.yaml`
+2. Применим configMap:
+  `kubectl apply -f configMap.yaml`
 
-3. Создадим сервис для доступа к поду: 
-  `minikube kubectl -- expose pod vault --type=NodePort --port=8200`
+3. Создадим и применим replicaSet с двумя репликами контейнера [ifilyaninitmo/itdt-contained-frontend:master](https://hub.docker.com/repository/docker/ifilyaninitmo/itdt-contained-frontend), а также передадим переменные из configMap `REACT_APP_USERNAME` и `REACT_APP_COMPANY_NAME`: 
+  ![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/09feaa8e-671d-48c2-95a5-e05d0c1cbe64)
 
-4. Пробросим порты для доступа: 
-  `minikube kubectl -- port-forward service/vault 8200:8200`
 
-5. Найдём данные для входа в vault в логах с использованием комманды:
- `minikube kubectl -- logs vault`
+4. Создадим и применим service: 
+  `kubectl apply -f service.yaml`
 
-![скрин](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/14c8d30e-eeaf-46e9-9d19-03e9692b8129)
+5. Сгенерируем TLS-сертификат и импортируем его в `minikube`:
+  `openssl req -x509 -newkey rsa:4096 -sha256 -days 12 -nodes -keyout tls.key -out tls.crt -subj "/CN=lab3.front.com"`
+  `kubectl create secret tls lab3-local-tls --cert=tls.crt --key=tls.key`
+![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/1c4a6a61-eabd-466f-a3d6-7484d491b9b7)
 
-6. С помощью `Root Token` произведём вход на портал:
-    
-![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/f6d636b5-7926-4837-ae95-17183b42e3f4)
 
-## Очистка ресурсов
-1. Удалим под:
-  `minikube kubectl -- delete pod vault`
+6. Создадим `Ingress`:
+`kubectl apply -f ingress.yaml`
 
-2. Удалим сервис:
-  `minikube kubectl -- delete service vault`
+7. Пропишем адрес в hosts и прокинем туннель между `minikube` и локальной машиной:
+`127.0.0.1 lab3.front.local`
 
-3. Остановим работу кластера:
-  `minikube stop`
+8. Переходим на сайт: https://lab3.front.local
 
 ## Схема организации контейеров и сервисов
 ![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/f0ba807b-e40b-434a-afa1-187dcb3f55a0)
