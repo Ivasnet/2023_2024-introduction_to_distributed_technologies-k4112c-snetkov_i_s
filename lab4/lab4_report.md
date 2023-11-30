@@ -39,17 +39,33 @@ ________________________________________________________________________________
   ![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/ae4b765b-13db-4c23-a866-e999ff599418)
 
 
-5. Создадим `calico.yaml` и применим его:
+5. Создадим `calico.yaml`, `deployment.yaml` и `service.yaml` и применим их:
+  `kubectl create -f deployment.yaml`
+  `kubectl create -f service.yaml`
   `kubectl create -f calico.yaml`
 
 6. Создадим IPPOOL с помощью `calico`: 
   `kubectl exec -i -n kube-system calicoctl -- /calicoctl create -f - < ippool.yaml --allow-version-mismatch`
-  ![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/20fe7f07-277b-459c-b34a-3dbc4b65673c)
+
+7. Далее откроем доступ к `Minikube` и пробросим порты:
+   `minikube service frontend-service`
+   `kubectl port-forward service/frontend-service 9090:9090` 
+8. Запустим клиента:
+  ![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/07a6aeb0-59cc-4c8a-916b-882fda72d0e9)
+9. С помощью команды `kubectl exec -it frontend-48dq56hd8-atuhq -- /bin/sh` выполним пинг одного из контейнеров:
+   ```
+    PING 10.244.134.187 (10.244.134.187): 56 data bytes
+    64 bytes from 10.244.134.187: seq=0 ttl=64 time=1.003 ms
+    64 bytes from 10.244.134.187: seq=1 ttl=64 time=0.237 ms
+    64 bytes from 10.244.134.187: seq=2 ttl=64 time=0.125 ms
+    64 bytes from 10.244.134.187: seq=3 ttl=64 time=0.101 ms
+  ```
 
 
 
 ## Схема организации контейеров и сервисов
-![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/f0ba807b-e40b-434a-afa1-187dcb3f55a0)
+![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/e53a27ae-5960-45a7-a2ab-8942ccbb5df2)
+
 
 
 
