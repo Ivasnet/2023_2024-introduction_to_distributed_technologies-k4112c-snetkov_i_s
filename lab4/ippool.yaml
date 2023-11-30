@@ -1,0 +1,15 @@
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: east-pool
+spec:
+  cidr: 10.0.0.0/24
+  nodeSelector: rack == '1'
+---
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: west-pool
+spec:
+  cidr: 10.0.1.0/24
+  nodeSelector: rack == '2'
