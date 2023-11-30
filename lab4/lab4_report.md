@@ -59,8 +59,6 @@ ________________________________________________________________________________
     64 bytes from 10.244.134.187: seq=1 ttl=64 time=0.237 ms
     64 bytes from 10.244.134.187: seq=2 ttl=64 time=0.125 ms
     64 bytes from 10.244.134.187: seq=3 ttl=64 time=0.101 ms
-
-
 ## Схема организации контейеров и сервисов
 ![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/e53a27ae-5960-45a7-a2ab-8942ccbb5df2)
 
