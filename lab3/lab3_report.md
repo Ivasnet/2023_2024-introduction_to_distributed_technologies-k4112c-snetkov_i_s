@@ -61,6 +61,7 @@ ________________________________________________________________________________
 
 
 ## Схема организации контейеров и сервисов
-![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/f0ba807b-e40b-434a-afa1-187dcb3f55a0)
+![изображение](https://github.com/Ivasnet/2023_2024-introduction_to_distributed_technologies-k4112c-snetkov_i_s/assets/70843270/aed2e4bb-5635-4748-9275-e96d5dedd314)
+
 
 
